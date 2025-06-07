@@ -1,4 +1,5 @@
 # Daily Chollos - Plataforma para recolección de ofertas
+[demo.webm](https://github.com/user-attachments/assets/aff965a4-a92e-4c06-a6a4-6b1278051acd)
 
 ---
 

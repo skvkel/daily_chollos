@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas y Descuentos - Los Mejores Productos del Día</title>
+    <meta name="description" content="Descubre las mejores ofertas y descuentos del día. Productos con hasta 90% de descuento de las mejores tiendas online. Actualizado diariamente.">
+    <meta name="keywords" content="ofertas, descuentos, productos, tiendas online, chollos, rebajas">
+    <meta name="author" content="Tu Sitio de Ofertas">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Ofertas y Descuentos - Los Mejores Productos del Día">
+    <meta property="og:description" content="Descubre las mejores ofertas y descuentos del día. Productos con hasta 90% de descuento.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dailychollos.com">
+    <meta property="og:image" content="https://dailychollos.com/og-image.jpg">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ofertas y Descuentos - Los Mejores Productos del Día">
+    <meta name="twitter:description" content="Descubre las mejores ofertas y descuentos del día.">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://dailychollos.com">
+
+    <!-- Favicon y Web App Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/img/favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/static/img/favicon/android-chrome-512x512.png">
+    <link rel="manifest" href="/static/img/favicon/site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="background-color" content="#ffffff">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Ofertas y Descuentos",
+        "description": "Portal de ofertas y descuentos actualizados diariamente",
+        "url": "https://dailychollos.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://dailychollos.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+</head>
+<body>
+     <!-- Loader overlay -->
+    <div id="loader-overlay" class="loader-overlay">
+        <div class="loader-container">
+            <div class="loader"></div>
+            <p class="loader-text">Cargando más productos...</p>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Botón toggle para móvil -->
+        <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="logo">
+                    <img src="/static/img/dailychollos-logo.png" alt="DailyChollos" class="logo-img">
+                </a>
+                <div class="stats" id="stats-counter">
+                    <span id="product-count">Cargando...</span>
+                </div>
+            </div>
+
+            <div class="filters-section">
+                <h2 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.2rem;">🔍 Filtrar por</h2>
+
+                <!-- DESCUENTO MÍNIMO -->
+                <div class="filter-group">
+                    <div class="filter-title" onclick="toggleFilter('discount')">
+                        DESCUENTO MÍNIMO
+                    </div>
+                    <div class="filter-content" id="discount-content">
+                        <div class="discount-buttons">
+                            <button class="discount-btn" data-discount="10">10%</button>
+                            <button class="discount-btn" data-discount="20">20%</button>
+                            <button class="discount-btn" data-discount="30">30%</button>
+                            <button class="discount-btn" data-discount="40">40%</button>
+                            <button class="discount-btn" data-discount="50">50%</button>
+                            <button class="discount-btn" data-discount="60">60%</button>
+                            <button class="discount-btn" data-discount="70">70%</button>
+                            <button class="discount-btn" data-discount="80">80%</button>
+                            <button class="discount-btn" data-discount="90">90%</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRECIO -->
+                <div class="filter-group">
+                    <div class="filter-title" onclick="toggleFilter('price')">
+                        PRECIO
+                    </div>
+                    <div class="filter-content" id="price-content">
+                        <div class="price-slider-container">
+                            <div class="price-range">
+                                <div class="price-range-fill" id="price-fill"></div>
+                            </div>
+                            <input type="range" id="price-min" class="price-input" min="0" max="1000" value="5" step="1">
+                            <input type="range" id="price-max" class="price-input" min="0" max="1000" value="500" step="1">
+                            <div class="price-values">
+                                <span>0 €</span>
+                                <span>1000 €</span>
+                            </div>
+                            <div class="price-display">
+                                <span id="price-min-display">5 €</span>
+                                <span>-</span>
+                                <span id="price-max-display">500 €</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REBAJADOS HOY -->
+                <div class="filter-group">
+                    <div class="filter-title" onclick="toggleFilter('sale-today')">
+                        REBAJADOS HOY
+                    </div>
+                    <div class="filter-content" id="sale-today-content">
+                        <div class="checkbox-container">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="sale-today-filter" class="checkbox-input">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">Solo productos rebajados hoy</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NUEVOS HOY -->
+                <div class="filter-group">
+                    <div class="filter-title" onclick="toggleFilter('new-today')">
+                        NUEVOS HOY
+                    </div>
+                    <div class="filter-content" id="new-today-content">
+                        <div class="checkbox-container">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="new-today-filter" class="checkbox-input">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">Solo productos nuevos hoy</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GÉNERO -->
+                <div class="filter-group">
+                    <div class="filter-title" onclick="toggleFilter('genre')">
+                        GÉNERO
+                        <span class="selected-count" id="genre-count"></span>
+                    </div>
+                    <div class="filter-content" id="genre-content">
+                        <div class="checkbox-group" id="genre-checkboxes">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="genre-hombre" value="HOMBRE">
+                                <label for="genre-hombre">Hombre</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="genre-mujer" value="MUJER">
+                                <label for="genre-mujer">Mujer</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="genre-junior" value="JUNIOR">
+                                <label for="genre-junior">Junior</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="no-genre" value="SIN ESPECIFICAR">
+                                <label for="no-genre">Sin género</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MARCA -->
+                <div class="filter-group">
+                    <div class="filter-title" onclick="toggleFilter('brand')">
+                        MARCA
+                        <span class="selected-count" id="brand-count"></span>
+                    </div>
+                    <div class="filter-content" id="brand-content">
+                        <div class="checkbox-group" id="brand-checkboxes">
+                            <!-- Las marcas se cargarán dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TIENDA -->
+                <div class="filter-group">
+                    <div class="filter-title" onclick="toggleFilter('store')">
+                        TIENDA
+                    </div>
+                    <div class="filter-content" id="store-content">
+                        <select class="filter-select" id="store-filter">
+                            <option value="">Todas las tiendas</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- COLOR -->
+                <div class="filter-group">
+                    <div class="filter-title" onclick="toggleFilter('color')">
+                        COLOR
+                        <span class="selected-count" id="color-count"></span>
+                    </div>
+                    <div class="filter-content" id="color-content">
+                        <div class="checkbox-group" id="color-checkboxes">
+                            <!-- Los colores se cargarán dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTONES DE ACCIÓN -->
+                <div class="filter-actions">
+                    <button class="btn primary" onclick="applyFilters()">Aplicar Filtros</button>
+                    <button class="btn secondary" onclick="clearFilters()">Limpiar Filtros</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="content">
+            <section class="hero">
+                <h1>Las Mejores Ofertas del Día</h1>
+                <p>Descubre productos con descuentos increíbles actualizados <strong>cada día</strong>. No te pierdas las mejores oportunidades de ahorro.</p>
+            </section>
+
+            <div class="sort-container">
+                <select class="sort-dropdown" id="sort-select" onchange="applySorting()">
+                    <option value="">Ordenar por...</option>
+                    <option value="price_asc">Precio: Menor a Mayor</option>
+                    <option value="price_desc">Precio: Mayor a Menor</option>
+                    <option value="discount_asc">Descuento: Menor a Mayor</option>
+                    <option value="discount_desc">Descuento: Mayor a Menor</option>
+                </select>
+            </div>
+
+            <section class="section" id="top-discounts-section">
+                <h2 class="section-title top-discounts">Productos con Mayor Descuento</h2>
+                <div class="products-grid" id="top-discounts-grid">
+                    <div class="loading">Cargando productos con mayores descuentos...</div>
+                </div>
+            </section>
+
+            <section class="section" id="updated-products-section">
+                <h2 class="section-title updated-products">Productos Actualizados Hoy</h2>
+                <div class="products-grid" id="updated-products-grid">
+                    <div class="loading">Cargando productos actualizados hoy...</div>
+                </div>
+            </section>
+
+            <section class="section" id="today-products-section">
+                <h2 class="section-title today-products">Novedades de Hoy</h2>
+                <div class="products-grid" id="today-products-grid">
+                    <div class="loading">Cargando productos de hoy...</div>
+                </div>
+            </section>
+
+            <section class="section" id="filtered-products-section" style="display: none;">
+                <h2 class="section-title filtered-products">Productos Filtrados</h2>
+                <div class="products-grid" id="filtered-products-grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 DailyChollos. Encuentra las mejores ofertas actualizadas diariamente.</p>
+        </div>
+    </footer>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
